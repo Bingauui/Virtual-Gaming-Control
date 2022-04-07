@@ -1,17 +1,17 @@
 #Python
 # bcdedit.exe /set testsigning on   关闭签名
 # bcdedit.exe /set testsigning off  开启签名
-#数据处理转发添加CRC验证
+#接受力反馈数据
 import threading
 import sys
 sys.path.append("C:\\Users\\Bing\\Documents\\Python") #改成放datastruct.py的文件夹
 from datastruct import *
 from ctypes import *
 
-pDll = CDLL("./Dll1.dll")
+pDll = CDLL("./Dll1.dll")  #DLL文件放在同目录下
 pDll.CloseDevice()
 pDll.setDevice()
-pDll.bReadFile.restype = GET_EFFECT_STRUCTURE
+pDll.bReadFile.restype = GET_EFFECT_STRUCTURE #ctypes 的接受参数设置成自定义的结构体
 def data():
     while True:
         stu = pDll.bReadFile()
