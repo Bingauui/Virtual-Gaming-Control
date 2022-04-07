@@ -3,7 +3,7 @@ data = bytes([0x01,data[13],data[12],0,0,0,data[3],data[2],data[1],data[0],data[
 
 reprot = c_char_p(data)
 bWriteFile(reprot,len(data))
-#定义了多少位的数据就发多长的byte数组  8bit的整数倍
+#定义了多少byte的数据就发多长的byte数组  byte的整数倍
 # UCHAR fbbReport[] = {  
 #             
 #             #pragma region 输入入报表
