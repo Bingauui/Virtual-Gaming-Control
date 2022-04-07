@@ -13,7 +13,7 @@ GET_EFFECT_STRUCTURE bReadFile() #返回力反馈数据的结构体
 GET_EFFECT_STRUCTURE.READ_CONSTANT_FROCE_DATA.Magnitude
 GET_EFFECT_STRUCTURE.READ_CONSTANT_FROCE_DATA.Magnitude1 赛车游戏力反馈一般只用这个数据 其他的看结构体定义
 
-'''sh
+```sh
 typedef struct _SET_GET_EFFECT_STRUCTURE
 {
     struct
@@ -99,4 +99,4 @@ typedef struct _SET_GET_EFFECT_STRUCTURE
     }UNDEFINED_DATA;
 
 }SET_GET_EFFECT_STRUCTURE, * PSET_GET_EFFECT_STRUCTURE;
-'''
+```
