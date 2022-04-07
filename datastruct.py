@@ -1,8 +1,8 @@
 from ctypes import *
 class SET_REPORT_REQUEST(Structure):
     _fields_ = [
-        ("report_id",c_ubyte),
-        ("effect_type",c_ubyte),
+        ("report_id",c_ubyte),  #报表ID
+        ("effect_type",c_ubyte),#力反馈类型  详细看HID描述符详解
         ("byte_count",c_ubyte)
     ]
 class PID_BLOCK_LOAD_PEPORT(Structure):
@@ -33,7 +33,7 @@ class SET_EFFECT_REPROT(Structure):
         ("Gain",c_ubyte),
         ("Gain1",c_ubyte),
         ("TrigerButton",c_ubyte),
-        ("AxesEnable",c_ubyte),
+        ("AxesEnable",c_ubyte), 
         ("XDirection",c_ubyte),
         ("YDirection",c_ubyte),
         ("Undefined",c_ubyte),
