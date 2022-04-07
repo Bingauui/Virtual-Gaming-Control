@@ -15,7 +15,7 @@ GET_EFFECT_STRUCTURE.READ_CONSTANT_FROCE_DATA.Magnitude1 赛车游戏力反馈�
 
 
 
-typedef struct _SET_GET_EFFECT_STRUCTURE
+struct _SET_GET_EFFECT_STRUCTURE
 {
     struct
     {
