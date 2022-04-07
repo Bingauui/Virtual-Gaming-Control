@@ -80,14 +80,9 @@ Mouse = bytes([
     0xc0
 ])
 
-cDll.sum.argtypes = {c_char_p,c_int32}
-reprot = c_char_p(lk)
+cDll.sum.argtypes = {c_char_p,}
+reprot = c_char_p(lk)  #创建指向上面byte数组的指针
 # cDll.sum(reprot,len(Mouse))
 cDll.DeleteVhf()
-cDll.CreatVhf(reprot,len(lk))
+cDll.CreatVhf(reprot,len(lk))  #创建设备所需的参数   标准HID描述符　　不符合规范会无反应　　上面两个byte数组第一个是力反馈相关的  第二个是鼠标的HID描述符
 
-# cDll.FindHidDevice(0x057E)
-# while True:
-#     cDll.GetReprot()
-#     print("\n")
-#     time.sleep(1)
