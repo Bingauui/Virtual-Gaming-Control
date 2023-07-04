@@ -1,0 +1,21 @@
+﻿  Building 'Virtual Gaming Control' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Debug\VirtualGamingControl.inf
+  Stamping [Version] section with DriverVer=07/04/2023,10.57.32.493
+  Driver.c
+  Froce.c
+  hidcontrol.c
+  Queue.c
+  正在生成代码...
+  Virtue Gaming Control.vcxproj -> D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\VirtualGamingControl.sys
+  Driver is 'Universal'.
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\Virtual Gaming Control\virtualgamingcontrol.cat

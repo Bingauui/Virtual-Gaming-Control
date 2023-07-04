@@ -24,6 +24,10 @@
     <DeployFiles />
     <ScriptName>Microsoft.DriverKit.DefaultDriverPackageInstallationClass.PerformDefaultDriverPackageInstallation</ScriptName>
     <ScriptDeviceQuery />
+    <SignMode>Off</SignMode>
+    <TestCertificate>CN=Zhang Bing., OU=Bing Software, DC=CQ, DC=ZH, DC=CN | 03D0578F0C41AB14280050182BE590725AB7AB80</TestCertificate>
+    <ProductionCertificate>
+    </ProductionCertificate>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DbgengKernelMachineName>New Computer</DbgengKernelMachineName>

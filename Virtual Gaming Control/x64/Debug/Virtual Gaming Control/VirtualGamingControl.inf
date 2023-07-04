@@ -1,0 +1,153 @@
+;
+; VirtualGamingControl.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System ; TODO: specify appropriate Class
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=VirtualGamingControl.cat
+DriverVer = 07/04/2023,10.57.32.493
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+VirtualGamingControl_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+VirtualGamingControl.sys  = 1,,
+;
+
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%VirtualGamingControl.DeviceDesc%=VirtualGamingControl_Device, Root\VirtualGamingControl ; TODO: edit hw-id
+
+[VirtualGamingControl_Device.NT]
+CopyFiles=Drivers_Dir
+AddReg=VirtualGamingControl_Device_NT_AddReg
+
+[VirtualGamingControl_Device_NT_AddReg]
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004,Description,0x00000000,"Gameing Control Vritue By Bing"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button0,0x00000000,"Menu"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button1,0x00000000,"Menu"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button2,0x00000000,"LeftStickButton"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button3,0x00000000,"RightStickButton"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button4,0x00000000,"LetterA"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button5,0x00000000,"LetterB"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button6,0x00000000,"LetterX"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button7,0x00000000,"LetterY"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button8,0x00000000,"LeftBumper"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Buttons,Button9,0x00000000,"RightBumper"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Switches,Switch0Down,0x00000000,"Down"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Switches,Switch0Left,0x00000000,"Left"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Switches,Switch0Right,0x00000000,"Right"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\Labels\Switches,Switch0Up,0x00000000,"Up"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel,MaxWheelAngle,0x00010001,0x000001c2
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Brake,AxisIndex,0x00010001,0x00000002
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Brake,Invert,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Clutch,AxisIndex,0x00010001,0x00000003
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Clutch,Invert,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Throttle,AxisIndex,0x00010001,0x0000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Throttle,Invert,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Wheel,AxisIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Wheel,Invert,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\NextGear,ButtonIndex,0x00010001,0x00000008
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\PreviousGear,ButtonIndex,0x00010001,0x00000009
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadDown,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadDown,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadDown,SwitchPosition,0x00000000,"Down"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadLeft,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadLeft,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadLeft,SwitchPosition,0x00000000,"Left"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadRight,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadRight,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadRight,SwitchPosition,0x00000000,"Right"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadUp,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadUp,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\DPadUp,SwitchPosition,0x00000000,"Up"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button1,ButtonIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button2,ButtonIndex,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button3,ButtonIndex,0x00010001,0x00000002
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button4,ButtonIndex,0x00010001,0x00000003
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button5,ButtonIndex,0x00010001,0x00000004
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button6,ButtonIndex,0x00010001,0x00000005
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button7,ButtonIndex,0x00010001,0x00000006
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\RacingWheel\Button8,ButtonIndex,0x00010001,0x00000007
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\Accept,ButtonIndex,0x00010001,0x00000004
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\Cancel,ButtonIndex,0x00010001,0x00000005
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\Menu,ButtonIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\View,ButtonIndex,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryDown,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryDown,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryDown,SwitchPosition,0x00000000,"Down"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryLeft,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryLeft,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryLeft,SwitchPosition,0x00000000,"Left"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryRight,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryRight,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryRight,SwitchPosition,0x00000000,"Right"
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryUp,IncludeAdjacent,0x00010001,0x00000001
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryUp,SwitchIndex,0x00010001,0x00000000
+HKLM,SYSTEM\CurrentControlSet\Control\GameInput\Devices\0498CF3200010004\UINavigation\PrimaryUp,SwitchPosition,0x00000000,"Up"
+
+
+[Drivers_Dir]
+VirtualGamingControl.sys
+
+;-------------- Service installation
+[VirtualGamingControl_Device.NT.Services]
+AddService = VirtualGamingControl,%SPSVCINST_ASSOCSERVICE%, VirtualGamingControl_Service_Inst
+
+; -------------- VirtualGamingControl driver install sections
+[VirtualGamingControl_Service_Inst]
+DisplayName    = %VirtualGamingControl.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\VirtualGamingControl.sys
+
+;
+;--- VirtualGamingControl_Device Coinstaller installation ------
+;
+
+[VirtualGamingControl_Device.NT.CoInstallers]
+AddReg=VirtualGamingControl_Device_CoInstaller_AddReg
+CopyFiles=VirtualGamingControl_Device_CoInstaller_CopyFiles
+
+[VirtualGamingControl_Device_CoInstaller_AddReg]
+;
+
+
+[VirtualGamingControl_Device.NT.HW]
+AddReg=VirtualGamingControl_Device_HW_AddReg
+
+[VirtualGamingControl_Device_HW_AddReg]
+HKR,,"LowerFilters",0x00010000, "vhf"
+
+[VirtualGamingControl_Device_CoInstaller_CopyFiles]
+;
+
+
+[VirtualGamingControl_Device.NT.Wdf]
+KmdfService =  VirtualGamingControl, VirtualGamingControl_wdfsect
+
+[VirtualGamingControl_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="by Xings" ;TODO: Replace with your manufacturer name
+DiskName = "VirtualGamingControl Installation Disk"
+VirtualGamingControl.DeviceDesc = "Virtual Gaming Control"
+VirtualGamingControl.SVCDESC = "Virtual Gaming Control Service"

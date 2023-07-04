@@ -82,7 +82,8 @@ Mouse = bytes([
 
 cDll.sum.argtypes = {c_char_p,}
 reprot = c_char_p(lk)  #创建指向上面byte数组的指针
-# cDll.sum(reprot,len(Mouse))
+# cDll.sum(reprot,len(lk))
 cDll.DeleteVhf()
 cDll.CreatVhf(reprot,len(lk))  #创建设备所需的参数   标准HID描述符　　不符合规范会无反应　　上面两个byte数组第一个是力反馈相关的  第二个是鼠标的HID描述符
 
+ 
