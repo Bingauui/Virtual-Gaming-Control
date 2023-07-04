@@ -15,13 +15,12 @@ VOID WriteDispath(
 	NTSTATUS  status = STATUS_SUCCESS;
 	WDFDEVICE device = WdfIoQueueGetDevice(Queue);
 	PDEVICE_CONTEXT deviceconext = DeviceGetContext(device);
-    
-	status = WdfRequestRetrieveInputBuffer(Request, 18, &buffer, NULL);
+	status = WdfRequestRetrieveInputBuffer(Request, Length, &buffer, NULL);
     //KdBreakPoint();
 	if (!NT_SUCCESS(status))
 		goto exit;
 	deviceconext->VhfHidReport.reportBuffer = buffer;
-	deviceconext->VhfHidReport.reportBufferLen = 18;
+	deviceconext->VhfHidReport.reportBufferLen = Length;
 	deviceconext->VhfHidReport.reportId = ((CHAR*)buffer)[0];
 	status = VhfReadReportSubmit(deviceconext->VhfHandle, &deviceconext->VhfHidReport);
 	

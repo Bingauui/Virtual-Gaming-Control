@@ -11,9 +11,8 @@
 // 添加要在此处预编译的标头
 
 HANDLE Device = NULL;
-SET_GET_EFFECT_STRUCTURE buffer = {0};
-Data data = { 0 };
-bool b;
+unsigned char buffer[2048] = { 0 };
+unsigned char sendBuffer[2048] = { 0 };
 DLLEXPORT void sum(PUCHAR s, int y) {
 	for (int i = 0; i < y; i++) {
 		printf("%d ", s[i]);
@@ -25,72 +24,58 @@ DLLEXPORT void setDevice() {
 		printf("设备对象已打开，请关闭后在试");
 		return;
 	}
-    Device = CreateFile(L"\\\\.\\.GameControl", GENERIC_ALL, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
-    if (Device == NULL || Device == INVALID_HANDLE_VALUE)
-    {
-        printf("设备对象打开失败，错误原因(%08X)\n", GetLastError());
-        system("pause");
-    }
+	Device = CreateFile(L"\\\\.\\.GameControl", GENERIC_ALL, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
+	if (Device == NULL || Device == INVALID_HANDLE_VALUE)
+	{
+		printf("设备对象打开失败，错误原因(%08X)\n", GetLastError());
+		system("pause");
+	}
 }
 
 HANDLE getDevice() {
-    return Device;
+	return Device;
 }
 DLLEXPORT int bReadFile() {
 	if (Device == NULL || Device == INVALID_HANDLE_VALUE) {
 		printf("请初始化Device在调用");
 		return 0;
 	}
-	b = ReadFile(Device, &buffer, 60, NULL, NULL);
+	DWORD readLength = 0;
+	bool b = ReadFile(Device, &buffer, 60, &readLength, NULL);
 	if (b) {
-		
-		return (buffer.READ_CONSTANT_FROCE_DATA.Magnitude1 << 8) + buffer.READ_CONSTANT_FROCE_DATA.Magnitude;
+
+		return readLength;
 	}
-	return 0;
+	return readLength;
 }
-DLLEXPORT int bWriteFile(int reprot, int button,int x,int y,int z,int whell) {
+DLLEXPORT int bWriteFile(PUCHAR data, int len) {
 	if (Device == NULL || Device == INVALID_HANDLE_VALUE) {
 		printf("请初始化Device在调用");
 		return 0;
 	}
-	
-	data.AsixData.AsixXorY = x;
-	data.AsixData.AsixZorRx = y;
-	data.AsixData.AsixRyorRz = z;
-	data.AsixData.Wheel = whell;
-	data.AsixData.const1 = whell>>16;
-	data.AsixData.button = button;
-	data.AsixData.reprotid = reprot;
-    bool suer = 0;
-    DWORD OperBytes = 0;
-	switch (reprot) {
-		case 1:
-			suer = WriteFile(Device, &data, 18, &OperBytes, NULL);
-			if (!suer) {
-				std::cout << "发送失败 Device:" << Device;
-			}
-			break;
-		case 2:
-			data.AsixData.button = 0;
-			data.AsixData.const1 = button;
-			suer = WriteFile(Device, &data, 4, &OperBytes, NULL);
-			if (!suer) {
-				std::cout << "发送失败 Device:" << Device;
-			}
-			break;
-
+	bool suer = 0;
+	DWORD OperBytes = 0;
+	memcpy(sendBuffer, data, len);
+	suer = WriteFile(Device, sendBuffer, len, &OperBytes, NULL);
+	if (!suer) {
+		printf("发送失败 Code: %08x\r\n", GetLastError());
 	}
-    return suer;
+
+	return OperBytes;
 }
 
 DLLEXPORT void GetReprot() {
 	byte buffer[64];
 	DWORD Oper = 0;
-	bool b = ReadFile(Device, &buffer,64,&Oper,NULL);
+	bool b = ReadFile(Device, &buffer, 64, &Oper, NULL);
+	if (!b)
+	{
+		printf("接收失败 Code: %08x\r\n", GetLastError());
+	}
 	for (int i = 0; i < sizeof(buffer); i++) {
 		printf("%x", buffer[i]);
 	}
-	
+
 }
 
 DLLEXPORT BOOL FindHidDevice(int vid) {
@@ -127,7 +112,7 @@ DLLEXPORT BOOL FindHidDevice(int vid) {
 
 		if (Result == FALSE)
 			continue;
-		Device = CreateFile(pDevDetailData->DevicePath, NULL, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		Device = CreateFile(pDevDetailData->DevicePath, GENERIC_ALL, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		free(pDevDetailData);
 		if (Device != INVALID_HANDLE_VALUE) {
 			Result = HidD_GetAttributes(Device, &DevAttributes);
@@ -144,7 +129,7 @@ DLLEXPORT BOOL FindHidDevice(int vid) {
 	return Result;
 }
 
-DLLEXPORT void CreatVhf(PUCHAR Reprot,int Len){
+DLLEXPORT void CreatVhf(PUCHAR Reprot, int Len) {
 	HANDLE vDevice = CreateFile(L"\\\\.\\.GameControl", GENERIC_ALL, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
 	if (vDevice == NULL || vDevice == INVALID_HANDLE_VALUE)
 	{
