@@ -35,18 +35,18 @@ DLLEXPORT void setDevice() {
 HANDLE getDevice() {
 	return Device;
 }
-DLLEXPORT int bReadFile() {
+DLLEXPORT unsigned char* bReadFile(int len) {
 	if (Device == NULL || Device == INVALID_HANDLE_VALUE) {
 		printf("请初始化Device在调用");
 		return 0;
 	}
 	DWORD readLength = 0;
-	bool b = ReadFile(Device, &buffer, 60, &readLength, NULL);
+	bool b = ReadFile(Device, &buffer, len, &readLength, NULL);
 	if (b) {
 
-		return readLength;
+		return buffer;
 	}
-	return readLength;
+	return buffer;
 }
 DLLEXPORT int bWriteFile(PUCHAR data, int len) {
 	if (Device == NULL || Device == INVALID_HANDLE_VALUE) {
@@ -64,7 +64,7 @@ DLLEXPORT int bWriteFile(PUCHAR data, int len) {
 	return OperBytes;
 }
 
-DLLEXPORT void GetReprot() {
+DLLEXPORT unsigned char* GetReprot() {
 	byte buffer[64];
 	DWORD Oper = 0;
 	bool b = ReadFile(Device, &buffer, 64, &Oper, NULL);
@@ -72,10 +72,7 @@ DLLEXPORT void GetReprot() {
 	{
 		printf("接收失败 Code: %08x\r\n", GetLastError());
 	}
-	for (int i = 0; i < sizeof(buffer); i++) {
-		printf("%x", buffer[i]);
-	}
-
+	return buffer;
 }
 
 DLLEXPORT BOOL FindHidDevice(int vid) {

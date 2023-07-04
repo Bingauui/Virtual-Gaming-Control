@@ -1,4 +1,5 @@
 ﻿  pch.cpp
   dllmain.cpp
+D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\Dll1\dllmain.cpp(75): warning C4172: 返回局部变量或临时变量的地址: buffer
     正在创建库 D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\Dll1.lib 和对象 D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\Dll1.exp
   Dll1.vcxproj -> D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\Dll1.dll

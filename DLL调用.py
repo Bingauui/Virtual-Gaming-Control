@@ -619,10 +619,14 @@ cDll.setDevice()
 writeDevice = cDll.bWriteFile
 writeDevice.argtypes = {c_char_p,}
 writeDevice.restype = c_int
+GetReport = cDll.GetReprot
+GetReport.restype = c_char_p
 i = 0
 while(i < 10000):
     i+=2
     i %= 255
+    recBuffer = GetReport()
+    print(recBuffer)
     sendBuffer = bytes([0x01,i,i,i,i,i,i,i,i,i,0x01,i,i,i,i,0x01,i,i,i,i,i,i])
     len1 = writeDevice(c_char_p(sendBuffer),len(sendBuffer))
     print("Send : %d" % len1)
