@@ -95,13 +95,15 @@ typedef struct _SET_GET_EFFECT_STRUCTURE
 	}UNDEFINED_DATA;
 
 }SET_GET_EFFECT_STRUCTURE, * PSET_GET_EFFECT_STRUCTURE;
-
+typedef struct
+{
+	unsigned char buffer[60];
+	int length;
+}ReportIdBuffer;
 typedef struct _WRITEREPORTBUFFER {
-	int bufferLeng;
-	unsigned char buffer[2048];
+	ReportIdBuffer buffer[0x7f];
 }WRITEREPORTBUFFER, * PWRITEREPORTBUFFER;
 void SetEffect(PSET_GET_EFFECT_STRUCTURE pset_get_effect, byte* buffer);
-
 VOID WriterReport(
 	_In_
 	PVOID VhfClientContext,

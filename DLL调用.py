@@ -1,6 +1,6 @@
 from ctypes import *
 import time
-cDll = CDLL("./Dll1.dll")
+cDll = CDLL("./Virtual Gaming Control/x64/Debug/VirtualGamingControlInterface.dll")
 lk = bytes([ 
   0x05, 0x01,        # Usage Page (Generic Desktop Ctrls)
   0x09, 0x04,        # Usage (Joystick)
@@ -14,11 +14,11 @@ lk = bytes([
   0x81, 0x02,        #   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
   0x05, 0x09,        #   Usage Page (Button)
   0x19, 0x01,        #   Usage Minimum (0x01)
-  0x29, 0x20,        #   Usage Maximum (0x10)
+  0x29, 0x10,        #   Usage Maximum (0x10)
   0x15, 0x00,        #   Logical Minimum (0)
   0x25, 0x01,        #   Logical Maximum (1)
   0x75, 0x01,        #   Report Size (1)
-  0x95, 0x20,        #   Report Count (16)
+  0x95, 0x10,        #   Report Count (16)
   0x81, 0x02,        #   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
   0x05, 0x01,        #   Usage Page (Generic Desktop Ctrls)
   0x09, 0x33,        #   Usage (Rx)
@@ -619,16 +619,18 @@ cDll.setDevice()
 writeDevice = cDll.bWriteFile
 writeDevice.argtypes = {c_char_p,}
 writeDevice.restype = c_int
-GetReport = cDll.GetReprot
-GetReport.restype = c_char_p
+rec = POINTER(c_ubyte * 10)
+readFile = cDll.bReadFile
+readFile.argtypes = {c_int,c_int}
+readFile.restype = rec
 i = 0
 while(i < 10000):
     i+=2
     i %= 255
-    recBuffer = GetReport()
-    print(recBuffer)
-    sendBuffer = bytes([0x01,i,i,i,i,i,i,i,i,i,0x01,i,i,i,i,0x01,i,i,i,i,i,i])
+    recBuffer = readFile(8,10)
+    print(list(recBuffer.contents))
+    sendBuffer = bytes([0x01,i,i,i,i,i,i,i,i,i,0x01,i,i,i,i,0x01,i,i,i,i])
     len1 = writeDevice(c_char_p(sendBuffer),len(sendBuffer))
-    print("Send : %d" % len1)
+    print("Send : %d\r\n" % len1)
     time.sleep(0.01)
     

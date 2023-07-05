@@ -3,7 +3,7 @@
 
 
 WDF_DECLARE_CONTEXT_TYPE_WITH_NAME(DEVICE_CONTEXT, DeviceGetContext);
-PVOID buffer;
+
 VOID WriteDispath(
 	_In_
 	WDFQUEUE Queue,
@@ -15,17 +15,16 @@ VOID WriteDispath(
 	NTSTATUS  status = STATUS_SUCCESS;
 	WDFDEVICE device = WdfIoQueueGetDevice(Queue);
 	PDEVICE_CONTEXT deviceconext = DeviceGetContext(device);
+	PVOID buffer;
 	status = WdfRequestRetrieveInputBuffer(Request, Length, &buffer, NULL);
 	//KdBreakPoint();
 	if (!NT_SUCCESS(status))
-		goto exit;
+		WdfRequestComplete(Request, status);
 	deviceconext->VhfHidReport.reportBuffer = buffer;
 	deviceconext->VhfHidReport.reportBufferLen = Length;
 	deviceconext->VhfHidReport.reportId = ((CHAR*)buffer)[0];
 	status = VhfReadReportSubmit(deviceconext->VhfHandle, &deviceconext->VhfHidReport);
-
-exit:
-	WdfRequestComplete(Request, status);
+	WdfRequestCompleteWithInformation(Request, status, Length);
 }
 
 VOID ReadDispath(
@@ -37,10 +36,10 @@ VOID ReadDispath(
 	size_t Length)
 {
 	NTSTATUS  status = STATUS_SUCCESS;
-	status = WdfRequestRetrieveOutputBuffer(Request, WriterReportBuffer.bufferLeng, &buffer, NULL);
-	memcpy(buffer, WriterReportBuffer.buffer, WriterReportBuffer.bufferLeng);
+	PVOID buffer;
+	status = WdfRequestRetrieveOutputBuffer(Request, Length, &buffer, NULL);
 	if (NT_SUCCESS(status)) {
-		WdfRequestCompleteWithInformation(Request, status, WriterReportBuffer.bufferLeng);
+		WdfRequestCompleteWithInformation(Request, status, Length);
 	}
 	else {
 		WdfRequestComplete(Request, status);
@@ -60,7 +59,7 @@ VOID IoControl(
 {
 	NTSTATUS  status = STATUS_SUCCESS;
 	WDFDEVICE device = WdfIoQueueGetDevice(Queue);
-
+	PVOID buffer;
 	switch (IoControlCode)
 	{
 	case IOCTL_VHFDEL:
@@ -107,8 +106,19 @@ VOID IoControl(
 			status = STATUS_BAD_INITIAL_PC;
 		}
 		break;
+	case IOCTL_READREPORTID:
+		PAGED_CODE();
+		PVOID inBuffer, outBuffer;
+		status = WdfRequestRetrieveInputBuffer(Request, InputBufferLength, &inBuffer, NULL);
+		int id = ((unsigned char*)inBuffer)[0];
+		status = WdfRequestRetrieveOutputBuffer(Request, OutputBufferLength, &outBuffer, NULL);
+		memcpy(outBuffer, WriterReportBuffer.buffer[id].buffer, WriterReportBuffer.buffer[id].length);
+		if (!NT_SUCCESS(status)) {
+			goto exit;
+		}
+		WdfRequestCompleteWithInformation(Request, status, WriterReportBuffer.buffer[id].length);
+		return;
 	}
 exit:
 	WdfRequestComplete(Request, status);
-
 }

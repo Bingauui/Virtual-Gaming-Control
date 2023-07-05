@@ -1,4 +1,5 @@
 #include "Froce.h"
+
 VOID WriterReport(
 	_In_
 	PVOID VhfClientContext,
@@ -8,10 +9,11 @@ VOID WriterReport(
 	PVOID VhfOperationContext,
 	_In_
 	PHID_XFER_PACKET HidTransferPacket) {
-	memcpy(VhfClientContext, &HidTransferPacket->reportBufferLen, sizeof(ULONG));
-	memcpy(((char*)VhfClientContext) + sizeof(ULONG), HidTransferPacket->reportBuffer, HidTransferPacket->reportBufferLen);
-	//KdPrint(("Reprot ID: %d ; Data: %d %d %d %d %d %d",HidTransferPacket->reportId, HidTransferPacket->reportBuffer[1], HidTransferPacket->reportBuffer[2],
-	//HidTransferPacket->reportBuffer[3], HidTransferPacket->reportBuffer[4], HidTransferPacket->reportBuffer[5], HidTransferPacket->reportBuffer[6]));
+	PWRITEREPORTBUFFER Temp = VhfClientContext;
+	if (HidTransferPacket->reportBufferLen <= 60) {
+		Temp->buffer[HidTransferPacket->reportId].length = HidTransferPacket->reportBufferLen;
+		memcpy(Temp->buffer[HidTransferPacket->reportId].buffer, HidTransferPacket->reportBuffer, HidTransferPacket->reportBufferLen);
+	}
 	VhfAsyncOperationComplete(VhfOperationHandle, STATUS_SUCCESS);
 }
 

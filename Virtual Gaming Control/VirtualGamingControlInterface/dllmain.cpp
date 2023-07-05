@@ -35,16 +35,16 @@ DLLEXPORT void setDevice() {
 HANDLE getDevice() {
 	return Device;
 }
-DLLEXPORT unsigned char* bReadFile(int len) {
+DLLEXPORT unsigned char* bReadFile(int id, int len) {
 	if (Device == NULL || Device == INVALID_HANDLE_VALUE) {
 		printf("请初始化Device在调用");
 		return 0;
 	}
+	unsigned char Id = id;
 	DWORD readLength = 0;
-	bool b = ReadFile(Device, &buffer, len, &readLength, NULL);
-	if (b) {
-
-		return buffer;
+	bool b = DeviceIoControl(Device, IOCTL_READREPORTID, &Id, 1, buffer, len, &readLength, NULL);
+	if (!b) {
+		return 0;
 	}
 	return buffer;
 }
