@@ -8,7 +8,7 @@ Class=System ; TODO: specify appropriate Class
 ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
 Provider=%ManufacturerName%
 CatalogFile=VirtualGamingControl.cat
-DriverVer = 07/04/2023,16.53.45.20
+DriverVer = 07/05/2023,10.19.16.367
 PnpLockdown=1
 
 [DestinationDirs]

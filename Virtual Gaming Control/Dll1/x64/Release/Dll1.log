@@ -1,9 +1,0 @@
-﻿  pch.cpp
-  dllmain.cpp
-    正在创建库 C:\Users\Bing\source\repos\Dll1\x64\Release\Dll1.lib 和对象 C:\Users\Bing\source\repos\Dll1\x64\Release\Dll1.exp
-  正在生成代码
-  Previous IPDB not found, fall back to full compilation.
-C:\Users\Bing\source\repos\Dll1\dllmain.cpp(49): warning C4715: “bReadFile”: 不是所有的控件路径都返回值
-  All 22 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  已完成代码的生成
-  Dll1.vcxproj -> C:\Users\Bing\source\repos\Dll1\x64\Release\Dll1.dll

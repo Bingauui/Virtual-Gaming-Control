@@ -1,0 +1,5 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Dll1.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  pch.cpp
+  dllmain.cpp
+    正在创建库 D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\VirtualGamingControlInterface.lib 和对象 D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\VirtualGamingControlInterface.exp
+  Dll1.vcxproj -> D:\Project\Virtual-Gaming-Control\Virtual Gaming Control\x64\Debug\VirtualGamingControlInterface.dll

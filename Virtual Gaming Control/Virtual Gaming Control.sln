@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Virtual Gaming Control", "Virtue Gaming Control.vcxproj", "{F33380BE-792A-4AE2-AC80-89F18872E5CF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dll1", "Dll1\Dll1.vcxproj", "{6DCEFE11-AB47-4130-B730-61E497A51C96}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VirtualGamingControlInterface", "VirtualGamingControlInterface\VirtualGamingControlInterface.vcxproj", "{6DCEFE11-AB47-4130-B730-61E497A51C96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

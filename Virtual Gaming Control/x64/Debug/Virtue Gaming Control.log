@@ -1,6 +1,6 @@
 ﻿  Building 'Virtual Gaming Control' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Debug\VirtualGamingControl.inf
-  Stamping [Version] section with DriverVer=07/04/2023,16.53.45.20
+  Stamping [Version] section with DriverVer=07/05/2023,10.19.16.367
   Driver.c
   Froce.c
   hidcontrol.c
