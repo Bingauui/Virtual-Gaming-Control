@@ -3,5 +3,3 @@
 
 HID协议相关可以多看文档  https://www.usb.org/hid
 
-不常看Github\
-交流群:497122134
